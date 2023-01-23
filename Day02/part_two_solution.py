@@ -27,7 +27,39 @@ def calculate_score(move, outcome):
         print("INVALID OUTCOME")
 
     return score
-    
+
+
+def calculate_correct_move(player_1_move, required_outcome):
+    if player_1_move == 0:
+        if required_outcome == 0:
+            return 2
+        elif required_outcome == 1:
+            return 0
+        elif required_outcome == 2:
+            return 1
+        else:
+            print("INVALID OUTCOME")
+    elif player_1_move == 1:
+        if required_outcome == 0:
+            return 0
+        elif required_outcome == 1:
+            return 1
+        elif required_outcome == 2:
+            return 2
+        else:
+            print("INVALID OUTCOME")
+    elif player_1_move == 2:
+        if required_outcome == 0:
+            return 1
+        elif required_outcome == 1:
+            return 2
+        elif required_outcome == 2:
+            return 0
+        else:
+            print("INVALID OUTCOME")
+    else:
+        print("INVALID MOVE")
+
 def rock_paper_scissors(player_1_move, player_2_move):    
     if player_1_move == player_2_move:
         # 0 0
@@ -55,6 +87,7 @@ def rock_paper_scissors(player_1_move, player_2_move):
     else:
         print("INVALID INPUT")
 
+
 def main():
     total_player_2_score = 0
 
@@ -66,6 +99,7 @@ def main():
 
             player_1_move = -1
             player_2_move = -1
+            required_outcome = -1
             
             if split_line[0] == 'A':
                 player_1_move = 0
@@ -77,14 +111,15 @@ def main():
                 print("INVALID INPUT IN LEFT COLUMN")
             
             if split_line[1] == 'X':
-                player_2_move = 0
+                required_outcome = 0
             elif split_line[1] == 'Y':
-                player_2_move = 1
+                required_outcome = 1
             elif split_line[1] == 'Z':  
-                player_2_move = 2
+                required_outcome = 2
             else:
                 print("INVALID INPUT IN RIGHT COLUMN")
 
+            player_2_move = calculate_correct_move(player_1_move, required_outcome)
             outcome = rock_paper_scissors(player_1_move, player_2_move)
             player_2_score = calculate_score(player_2_move, outcome)
             total_player_2_score += player_2_score
